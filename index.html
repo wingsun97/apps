@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>APK 下载</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      background: #0b1220;
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .card {
+      max-width: 420px;
+      margin: auto;
+      padding: 26px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    h1 {
+      margin: 10px 0 6px;
+      font-size: 22px;
+    }
+    p {
+      color: #b7c0d0;
+      font-size: 14px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: linear-gradient(90deg, #4f46e5, #06b6d4);
+      padding: 14px 24px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(79,70,229,0.28);
+    }
+    .btn:active { transform: translateY(1px); }
+
+    /* 微信遮罩提示 */
+    .wechat-mask {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.78);
+      color: white;
+      padding: 26px;
+      z-index: 999;
+    }
+    .arrow {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      width: 90px;
+      height: 90px;
+      border-right: 4px solid #fff;
+      border-top: 4px solid #fff;
+      transform: rotate(45deg);
+      animation: float 1.6s infinite ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); }
+      50% { transform: translateY(-8px) rotate(45deg); }
+      100% { transform: translateY(0) rotate(45deg); }
+    }
+    .mask-text {
+      margin-top: 150px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="mainBox">
+    <h1>下载 Android APK</h1>
+    <p>如果你是在微信中打开，请使用右上角菜单选择「浏览器打开」。</p>
+    <a id="downloadBtn" class="btn" href="#">下载 APK</a>
+  </div>
+
+  <!-- 微信内置浏览器遮罩层 -->
+  <div class="wechat-mask" id="wechatMask">
+    <div class="arrow"></div>
+    <div class="mask-text">
+      在微信中无法直接下载 APK<br>
+      请点击右上角菜单<br>
+      选择「在浏览器中打开」
+    </div>
+  </div>
+
+  <script>
+    // ⚠️ 这里改成你的 GitHub Releases APK 地址
+    const APK_URL = "https://github.com/yourname/yourrepo/releases/latest/download/app.apk";
+
+    const isWeChat = /micromessenger/i.test(navigator.userAgent);
+    const downloadBtn = document.getElementById("downloadBtn");
+    const mask = document.getElementById("wechatMask");
+
+    if (isWeChat) {
+      // 在微信：显示遮罩提示，不允许点击
+      mask.style.display = "block";
+      downloadBtn.style.pointerEvents = "none";
+      downloadBtn.style.opacity = "0.5";
+    } else {
+      // 系统浏览器：启用下载
+      downloadBtn.href = APK_URL;
+    }
+  </script>
+</body>
+</html>
