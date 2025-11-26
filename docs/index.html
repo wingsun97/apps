@@ -53,23 +53,23 @@
       padding: 26px;
       z-index: 999;
     }
-    /* 右上角箭头（缩小 + 逆时针 75°） */
+    /* 右上角箭头（缩小 + 逆时针 60°） */
     .arrow {
       position: absolute;
       right: 20px;
       top: 20px;
-      width: 60px;
-      height: 60px;
+      width: 48px;
+      height: 48px;
       border-right: 4px solid #fff;
       border-top: 4px solid #fff;
-      transform: rotate(-75deg);   /* 让水平箭头逆时针转 75° */
+      transform: rotate(-60deg);   /* 让水平箭头逆时针转 60° */
       animation: float 1.6s infinite ease-in-out;
     }
 
     @keyframes float {
-      0%   { transform: translateY(0) rotate(-75deg); }
-      50%  { transform: translateY(-6px) rotate(-75deg); }
-      100% { transform: translateY(0) rotate(-75deg); }
+      0%   { transform: translateY(0) rotate(-60deg); }
+      50%  { transform: translateY(-6px) rotate(-60deg); }
+      100% { transform: translateY(0) rotate(-60deg); }
     }
     .mask-text {
       margin-top: 150px;
