@@ -53,7 +53,7 @@
       padding: 26px;
       z-index: 999;
     }
-    /* 右上角箭头（缩小 + 逆时针 60°） */
+    /* 右上角箭头（缩小 + 逆时针 45°） */
     .arrow {
       position: absolute;
       right: 20px;
@@ -62,14 +62,14 @@
       height: 48px;
       border-right: 4px solid #fff;
       border-top: 4px solid #fff;
-      transform: rotate(-60deg);   /* 让水平箭头逆时针转 60° */
+      transform: rotate(-45deg);   /* 让水平箭头逆时针转 45° */
       animation: float 1.6s infinite ease-in-out;
     }
 
     @keyframes float {
-      0%   { transform: translateY(0) rotate(-60deg); }
-      50%  { transform: translateY(-6px) rotate(-60deg); }
-      100% { transform: translateY(0) rotate(-60deg); }
+      0%   { transform: translateY(0) rotate(-45deg); }
+      50%  { transform: translateY(-6px) rotate(-45deg); }
+      100% { transform: translateY(0) rotate(-45deg); }
     }
     .mask-text {
       margin-top: 150px;
