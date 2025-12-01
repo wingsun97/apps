@@ -1,250 +1,224 @@
-<!doctype html>
-<html lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>示例公司 — 简洁现代 SaaS 企业站</title>
-  <link rel="icon" href="data:,">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>公司介绍</title>
   <style>
-    :root{
-      --bg: #ffffff;
-      --text: #0f172a;
-      --muted: #64748b;
-      --accent: #6366f1;
-      --radius: 16px;
-      --max: 1080px;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    :root {
+      --header-height: 64px;
     }
 
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
+    html {
+      scroll-behavior: smooth;
     }
 
-    /* 宽度容器 */
-    .container{
-      width:100%;
-      max-width:var(--max);
-      margin:0 auto;
-      padding:0 1rem;
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      color: #111;
+      line-height: 1.6;
+      background: #fff;
     }
 
-    /* 一屏一部分 */
-    section{
-      min-height:10vh;
-      display:flex;
-      align-items:center;
-      padding:4rem 0;
-      border-bottom:1px solid #e2e8f0;
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: #ffffffd8;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px;
+      z-index: 1000;
     }
 
-    h1, h2, h3{ margin:0; font-weight:700; }
-    h1{ font-size:clamp(2.4rem,4vw,3.6rem); line-height:1.15; }
-    h2{ font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:2rem; }
-    p{ color:var(--muted); max-width:70ch; }
-    a{ color:var(--accent); text-decoration:none; }
-
-    /* 顶部导航：极简风 */
-    header{
-      position:fixed;
-      width:100%;
-      top:0;
-      left:0;
-      backdrop-filter:blur(12px);
-      background:rgba(255,255,255,0.75);
-      border-bottom:1px solid #e2e8f0;
-      z-index:10;
-    }
-    nav{
-      height:64px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-    nav a{
-      margin-left:1.4rem;
-      color:var(--text);
-      font-weight:500;
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
     }
 
-    /* HERO */
-    .hero{
-      text-align:center;
-      justify-content:center;
-    }
-    .hero p{
-      margin:1rem auto 2rem auto;
-      font-size:1.1rem;
-    }
-    .btn{
-      display:inline-block;
-      background:var(--accent);
-      color:white;
-      padding:0.9rem 1.3rem;
-      border-radius:var(--radius);
-      font-weight:600;
-      margin-top:0.5rem;
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
     }
 
-    /* GRID */
-    .grid{
-      display:grid;
-      gap:2rem;
-      grid-template-columns:1fr;
-    }
-    @media(min-width:760px){
-      .grid-2{ grid-template-columns:1fr 1fr; }
-      .grid-3{ grid-template-columns:repeat(3,1fr); }
+    nav a:hover {
+      color: #000;
+      border-bottom: 2px solid #000;
+      padding-bottom: 2px;
     }
 
-    /* 卡片 */
-    .card{
-      padding:2rem;
-      border-radius:var(--radius);
-      border:1px solid #e2e8f0;
-      background:white;
+    /* Global section layout */
+    header, section {
+      padding: 80px 24px;
+      max-width: 960px;
+      margin: auto;
     }
-    .card h3{
-      margin-bottom:0.5rem;
-      font-size:1.4rem;
+
+    /* Offset for fixed header */
+    section, header.hero {
+      scroll-margin-top: var(--header-height);
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding-top: 160px;
+      padding-bottom: 160px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: #555;
+      margin-bottom: 32px;
+    }
+    .hero a {
+      padding: 12px 32px;
+      border-radius: 8px;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    /* Section titles */
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    /* Products grid */
+    .grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card {
+      padding: 24px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      background: #fafafa;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.05);
     }
 
     /* Contact */
-    input, textarea{
-      width:100%;
-      padding:0.9rem;
-      border:1px solid #cbd5e1;
-      border-radius:var(--radius);
-      font-size:1rem;
-      margin-bottom:1rem;
+    .contact a {
+      color: #111;
+      text-decoration: none;
+      border-bottom: 1px solid #111;
     }
 
-    footer{
-      text-align:center;
-      color:var(--muted);
-      padding:2rem 0;
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: #888;
+      font-size: 0.9rem;
     }
 
-    /* 让导航不遮挡内容 */
-    .offset{
-      padding-top:64px;
+    /* Mobile nav */
+    @media (max-width: 640px) {
+      nav {
+        display: none;
+      }
+      .mobile-note {
+        display: block;
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 8px;
+      }
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  <div class="container">
+  <!-- FIXED HEADER -->
+  <div class="header">
+    <div class="logo">MyCompany</div>
     <nav>
-      <strong>示例公司</strong>
-      <div>
-        <a href="#about">关于我们</a>
-        <a href="#products">产品</a>
-        <a href="#services">服务</a>
-        <a href="#contact">联系</a>
-      </div>
+      <a href="#about">关于我们</a>
+      <a href="#products">产品</a>
+      <a href="#service">服务</a>
+      <a href="#contact">联系</a>
     </nav>
   </div>
-</header>
 
-<div class="offset">
+  <!-- HERO -->
+  <header class="hero">
+    <h1>让你的业务更进一步</h1>
+    <p>我们提供现代化数字解决方案，帮助企业高速成长。</p>
+    <a href="#contact">联系我们</a>
+  </header>
 
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="container">
-    <h1>让现代化产品与技术<br>赋能你的业务增长</h1>
-    <p>我们专注于 SaaS 产品、企业数字化平台、商用系统研发，帮助企业更快速、更灵活、更可靠地交付核心价值。</p>
-    <a class="btn" href="#contact">开始合作</a>
-  </div>
-</section>
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>关于我们</h2>
+    <p>
+      我们是一家专注于企业数字化升级的科技公司，提供网站建设、品牌系统、
+      智能工具与业务流程优化服务。团队由设计师、工程师与战略顾问组成，
+      以体验与效率为核心，为企业打造可靠、优雅、可扩展的产品体验。
+    </p>
+  </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div>
-      <h2>关于我们</h2>
-      <p>示例公司是一支跨产品、设计、工程的现代化技术团队。我们帮助企业从 0 到 1 构建数字化产品，也支持从 1 到 100 的产品扩展、稳定性提升和持续迭代。</p>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section id="products">
-  <div class="container">
-    <h2>产品</h2>
-
-    <div class="grid grid-3">
+  <!-- PRODUCTS -->
+  <section id="products">
+    <h2>核心产品</h2>
+    <div class="grid">
       <div class="card">
-        <h3>电商平台</h3>
-        <p>完整的商品、支付、订单与后台管理系统。适合快速上线品牌商城。</p>
+        <h3>企业官网系统</h3>
+        <p>快速搭建企业形象站点，附带 SEO、国际化、多模板支持。</p>
       </div>
       <div class="card">
-        <h3>协作平台</h3>
-        <p>知识库、任务管理、审批流等企业内部协同套件，支持权限与 SSO。</p>
+        <h3>SaaS 管理平台</h3>
+        <p>会员、支付、权限统一管理，为创业者提供灵活基础设施。</p>
       </div>
       <div class="card">
-        <h3>API 网关</h3>
-        <p>为开发者提供稳定的 API 管理、监控与第三方集成 SDK。</p>
+        <h3>内容管理 CMS</h3>
+        <p>一键发布、版本控制、工作流审批，轻松管理各类内容。</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="container">
-    <h2>服务</h2>
+  <!-- SERVICES -->
+  <section id="service">
+    <h2>服务能力</h2>
+    <p>我们提供全套策略与技术服务，包括但不限于：</p>
+    <ul>
+      <li>品牌与视觉识别</li>
+      <li>全栈开发与系统架构设计</li>
+      <li>移动应用与 Web App 开发</li>
+      <li>交互设计与用户体验优化</li>
+      <li>企业流程数字化改造</li>
+    </ul>
+  </section>
 
-    <div class="grid grid-2">
-      <div class="card">
-        <h3>产品设计</h3>
-        <p>从用户访谈、信息架构到 Figma 原型与交互验证，构建可实现的产品方案。</p>
-      </div>
-      <div class="card">
-        <h3>全栈开发</h3>
-        <p>Web / App / 后端服务 / DevOps，保证从开发到上线的全链路交付质量。</p>
-      </div>
-      <div class="card">
-        <h3>技术咨询</h3>
-        <p>架构优化、成本优化、系统升级与性能调优等定制技术方案。</p>
-      </div>
-      <div class="card">
-        <h3>长期合作</h3>
-        <p>按月或按季度进行产品迭代、技术维护与功能增强。</p>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <h2>联系我们</h2>
+    <p>邮箱：<a href="mailto:hello@example.com">hello@example.com</a></p>
+    <p>地址：深圳市南山科技园创新大厦 302</p>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <div style="max-width:600px; margin:0 auto; width:100%;">
-      <h2>联系</h2>
-
-      <form>
-        <input type="text" placeholder="姓名" required />
-        <input type="email" placeholder="邮箱" required />
-        <textarea rows="5" placeholder="您的需求或问题…" required></textarea>
-        <button class="btn" type="submit">发送</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<footer>
-  © <span id="year"></span> 示例公司
-</footer>
-
-</div>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+  <footer>
+    © 2025 Your Company. 保留所有权利。
+  </footer>
 
 </body>
 </html>
