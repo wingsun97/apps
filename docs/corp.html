@@ -23,14 +23,11 @@
       background: #fff;
     }
 
-    /* Shared container */
+    /* Shared container for sections and hero */
     .container {
       max-width: var(--container-width);
       padding: 0 var(--padding-x);
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
 
     /* Header */
@@ -44,6 +41,13 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #eee;
       z-index: 1000;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
     }
 
     .logo {
@@ -95,6 +99,7 @@
       color: #fff;
       text-decoration: none;
       display: inline-block;
+      margin-top: 16px;
     }
 
     /* Section titles */
@@ -179,9 +184,9 @@
 </head>
 <body>
 
-  <!-- FIXED HEADER -->
+  <!-- HEADER -->
   <div class="header">
-    <div class="container">
+    <div class="container header-inner">
       <div class="logo">MyCompany</div>
       <nav class="desktop-nav">
         <a href="#about">关于我们</a>
