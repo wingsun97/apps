@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>公司介绍</title>
   <style>
+    :root {
+      --header-height: 64px;
+      --container-width: 960px;
+      --padding-x: 24px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
@@ -13,28 +23,77 @@
       background: #fff;
     }
 
-    header, section {
-      padding: 80px 24px;
-      max-width: 960px;
-      margin: auto;
+    /* Shared container */
+    .container {
+      max-width: var(--container-width);
+      padding: 0 var(--padding-x);
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: #ffffffd8;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    nav a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #000;
+      border-bottom: 2px solid #000;
+      padding-bottom: 2px;
+    }
+
+    header.hero, section {
+      padding: 80px 0;
+      scroll-margin-top: var(--header-height);
     }
 
     /* Hero */
     .hero {
+      padding-top: 160px;
+      padding-bottom: 160px;
       text-align: center;
-      padding-top: 120px;
-      padding-bottom: 120px;
     }
+
     .hero h1 {
       font-size: clamp(2rem, 6vw, 4rem);
       font-weight: 700;
       margin-bottom: 20px;
     }
+
     .hero p {
       font-size: clamp(1rem, 2vw, 1.25rem);
       color: #555;
       margin-bottom: 32px;
     }
+
     .hero a {
       padding: 12px 32px;
       border-radius: 8px;
@@ -51,7 +110,7 @@
       font-weight: 600;
     }
 
-    /* Products grid */
+    /* Grid */
     .grid {
       display: grid;
       gap: 24px;
@@ -65,6 +124,7 @@
       background: #fafafa;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+
     .card:hover {
       transform: translateY(-4px);
       box-shadow: 0 6px 12px rgba(0,0,0,0.05);
@@ -83,65 +143,94 @@
       color: #888;
       font-size: 0.9rem;
     }
+
+    /* Mobile nav */
+    @media (max-width: 640px) {
+      nav {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- FIXED HEADER -->
+  <div class="header">
+    <div class="container header-inner">
+      <div class="logo">MyCompany</div>
+      <nav>
+        <a href="#about">关于我们</a>
+        <a href="#products">产品</a>
+        <a href="#service">服务</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </div>
+  </div>
+
   <!-- HERO -->
   <header class="hero">
-    <h1>让你的业务更进一步</h1>
-    <p>我们提供现代化数字解决方案，帮助企业高速成长。</p>
-    <a href="#contact">联系我们</a>
+    <div class="container">
+      <h1>让你的业务更进一步</h1>
+      <p>我们提供现代化数字解决方案，帮助企业高速成长。</p>
+      <a href="#contact">联系我们</a>
+    </div>
   </header>
 
   <!-- ABOUT -->
   <section id="about">
-    <h2>关于我们</h2>
-    <p>
-      我们是一家专注于企业数字化升级的科技公司，提供网站建设、品牌系统、智能工具与业务流程优化服务。
-      团队由设计师、工程师与战略顾问组成，以体验与效率为核心，为企业打造可靠、优雅、可扩展的产品体验。
-    </p>
+    <div class="container">
+      <h2>关于我们</h2>
+      <p>
+        我们是一家专注于企业数字化升级的科技公司，提供网站建设、品牌系统、
+        智能工具与业务流程优化服务。团队由设计师、工程师与战略顾问组成，
+        以体验与效率为核心，为企业打造可靠、优雅、可扩展的产品体验。
+      </p>
+    </div>
   </section>
 
   <!-- PRODUCTS -->
   <section id="products">
-    <h2>核心产品</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>企业官网系统</h3>
-        <p>快速搭建属于你的企业形象，SEO 优化、国际化、多模板支持。</p>
-      </div>
-      <div class="card">
-        <h3>SaaS 管理平台</h3>
-        <p>会员系统、支付、权限管理一体化，为创业者提供灵活基础设施。</p>
-      </div>
-      <div class="card">
-        <h3>内容管理系统 CMS</h3>
-        <p>一键发布、版本控制、工作流审批，轻松管理任何内容。</p>
+    <div class="container">
+      <h2>核心产品</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>企业官网系统</h3>
+          <p>快速搭建企业形象站点，附带 SEO、国际化、多模板支持。</p>
+        </div>
+        <div class="card">
+          <h3>SaaS 管理平台</h3>
+          <p>会员、支付、权限统一管理，灵活高效。</p>
+        </div>
+        <div class="card">
+          <h3>内容管理 CMS</h3>
+          <p>版本控制、审批流程、一键发布，轻松管理内容。</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- SERVICES -->
   <section id="service">
-    <h2>服务能力</h2>
-    <p>
-      我们不仅交付产品，还提供完整的策略咨询与技术服务，包括：
-    </p>
-    <ul>
-      <li>品牌设计 & 视觉识别</li>
-      <li>全栈开发与系统架构</li>
-      <li>移动应用与 Web App 开发</li>
-      <li>交互设计与用户体验优化</li>
-      <li>企业内部流程数字化改造</li>
-    </ul>
+    <div class="container">
+      <h2>服务能力</h2>
+      <p>我们提供全套策略与技术服务，包括但不限于：</p>
+      <ul>
+        <li>品牌与视觉识别</li>
+        <li>全栈开发与系统架构设计</li>
+        <li>移动 App 与 Web App 开发</li>
+        <li>交互设计与用户体验优化</li>
+        <li>企业流程数字化改造</li>
+      </ul>
+    </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact" class="contact">
-    <h2>联系我们</h2>
-    <p>邮箱：<a href="mailto:hello@example.com">hello@example.com</a></p>
-    <p>地址：深圳市南山科技园创新大厦 302</p>
+    <div class="container">
+      <h2>联系我们</h2>
+      <p>邮箱：<a href="mailto:hello@example.com">hello@example.com</a></p>
+      <p>地址：深圳市南山科技园创新大厦 302</p>
+    </div>
   </section>
 
   <footer>
