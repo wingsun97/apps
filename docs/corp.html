@@ -28,6 +28,9 @@
       max-width: var(--container-width);
       padding: 0 var(--padding-x);
       margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     /* Header */
@@ -40,16 +43,7 @@
       background: #ffffffd8;
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #eee;
-      display: flex;
-      align-items: center;
       z-index: 1000;
-    }
-
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 100%;
     }
 
     .logo {
@@ -145,32 +139,40 @@
     }
 
     /* Mobile nav */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: #ffffffd8;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #eee;
+      padding: 0 var(--padding-x);
+    }
+
+    .mobile-menu a {
+      padding: 12px 0;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .mobile-menu.show {
+      display: flex;
+    }
+
     @media (max-width: 640px) {
-      nav {
+      nav.desktop-nav {
         display: none;
       }
       .mobile-menu-btn {
         display: block;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-      }
-      .mobile-menu {
-        display: none;
-        flex-direction: column;
-        background: #ffffffd8;
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid #eee;
-      }
-      .mobile-menu a {
-        padding: 12px 0;
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-      }
-      .mobile-menu.show {
-        display: flex;
       }
     }
   </style>
@@ -179,7 +181,7 @@
 
   <!-- FIXED HEADER -->
   <div class="header">
-    <div class="container header-inner">
+    <div class="container">
       <div class="logo">MyCompany</div>
       <nav class="desktop-nav">
         <a href="#about">关于我们</a>
