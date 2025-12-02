@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>公司介绍</title>
+  <title>Cape Labs</title>
   <style>
     :root {
       --header-height: 64px;
@@ -23,7 +23,7 @@
       background: #fff;
     }
 
-    /* Shared container */
+    /* Shared container for sections and hero */
     .container {
       max-width: var(--container-width);
       padding: 0 var(--padding-x);
@@ -40,15 +40,13 @@
       background: #ffffffd8;
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #eee;
-      display: flex;
-      align-items: center;
       z-index: 1000;
     }
 
     .header-inner {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       height: 100%;
     }
 
@@ -101,6 +99,7 @@
       color: #fff;
       text-decoration: none;
       display: inline-block;
+      margin-top: 16px;
     }
 
     /* Section titles */
@@ -145,25 +144,63 @@
     }
 
     /* Mobile nav */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: #ffffffd8;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #eee;
+      padding: 0 var(--padding-x);
+    }
+
+    .mobile-menu a {
+      padding: 12px 0;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .mobile-menu.show {
+      display: flex;
+    }
+
     @media (max-width: 640px) {
-      nav {
+      nav.desktop-nav {
         display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- FIXED HEADER -->
+  <!-- HEADER -->
   <div class="header">
     <div class="container header-inner">
-      <div class="logo">MyCompany</div>
-      <nav>
+      <div class="logo">Cape Labs</div>
+      <nav class="desktop-nav">
         <a href="#about">关于我们</a>
         <a href="#products">产品</a>
         <a href="#service">服务</a>
         <a href="#contact">联系</a>
       </nav>
+      <button class="mobile-menu-btn">&#9776;</button>
+    </div>
+    <div class="mobile-menu">
+      <a href="#about">关于我们</a>
+      <a href="#products">产品</a>
+      <a href="#service">服务</a>
+      <a href="#contact">联系</a>
     </div>
   </div>
 
@@ -228,14 +265,32 @@
   <section id="contact" class="contact">
     <div class="container">
       <h2>联系我们</h2>
-      <p>邮箱：<a href="mailto:hello@example.com">hello@example.com</a></p>
-      <p>地址：深圳市南山科技园创新大厦 302</p>
+      <p>邮箱：<a href="mailto:service.admin@capelabs.cn">service.admin@capelabs.cn</a></p>
+      <p>地址：北京市海淀区知春路51号慎昌大厦五层</p>
     </div>
   </section>
 
   <footer>
-    © 2025 Your Company. 保留所有权利。
+    © 2025 Cape Labs. 保留所有权利。
   </footer>
+
+  <script>
+    // 移动端菜单切换
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-menu a');
+
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+    });
+
+    // 点击移动端导航后自动收起菜单
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('show');
+      });
+    });
+  </script>
 
 </body>
 </html>
