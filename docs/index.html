@@ -1,117 +1,181 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>APK 下载</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                   "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
-      background: #0b1220;
-      color: #fff;
-      text-align: center;
-      padding: 40px 20px;
-    }
-    .card {
-      max-width: 420px;
-      margin: auto;
-      padding: 26px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-    }
-    h1 {
-      margin: 10px 0 6px;
-      font-size: 22px;
-    }
-    p {
-      color: #b7c0d0;
-      font-size: 14px;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      background: linear-gradient(90deg, #4f46e5, #06b6d4);
-      padding: 14px 24px;
-      border-radius: 10px;
-      color: white;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 6px 18px rgba(79,70,229,0.28);
-    }
-    .btn:active { transform: translateY(1px); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Neptu Note Download</title>
 
-    /* 微信遮罩提示 */
-    .wechat-mask {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.78);
-      color: white;
-      padding: 26px;
-      z-index: 999;
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        color: #fff;
+        overflow-x: hidden;
     }
-    /* 右上角箭头（缩小 + 逆时针 40°） */
-    .arrow {
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      width: 48px;
-      height: 48px;
-      border-right: 4px solid #fff;
-      border-top: 4px solid #fff;
-      transform: rotate(-40deg);   /* 让水平箭头逆时针转 40° */
-      animation: float 1.6s infinite ease-in-out;
+
+    body {
+        background: url("background_w.png") no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    /* 主容器：PC 最大宽度限制，移动全屏 */
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        height: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 30px 20px;
+        box-sizing: border-box;
+    }
+
+    .title {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 60px;
+        text-shadow: 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    .btn {
+        width: 260px;
+        padding: 14px 0;
+        border: 2px solid rgba(255,255,255,0.8);
+        border-radius: 12px;
+        margin: 18px 0;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,0.2);
+        backdrop-filter: blur(8px);
+        cursor: pointer;
+        transition: background 0.2s, opacity 0.2s;
+    }
+
+    .btn img {
+        width: 26px;
+        height: 26px;
+        margin-right: 12px;
+    }
+
+    .btn.disabled {
+        opacity: 0.4;
+        pointer-events: none;
+    }
+
+    .btn:not(.disabled):hover {
+        background: rgba(255,255,255,0.2);
+    }
+
+    /* 微信提示遮罩 */
+    #wechat-tip {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.76);
+        z-index: 1000;
+        color: #fff;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    #wechat-tip img {
+        width: 200px;
+        margin-top: 40px;
+        animation: float 1.6s infinite ease-in-out;
     }
 
     @keyframes float {
-      0%   { transform: translateY(0) rotate(-40deg); }
-      50%  { transform: translateY(-6px) rotate(-40deg); }
-      100% { transform: translateY(0) rotate(-40deg); }
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
     }
-    .mask-text {
-      margin-top: 150px;
-      font-size: 18px;
-      line-height: 1.6;
-    }
-  </style>
+</style>
+
 </head>
 <body>
-  <div class="card" id="mainBox">
-    <h1>下载 Android APK</h1>
-    <p>如果你是在微信中打开，请使用右上角菜单选择「浏览器打开」。</p>
-    <a id="downloadBtn" class="btn" href="#">下载 APK</a>
-  </div>
 
-  <!-- 微信内置浏览器遮罩层 -->
-  <div class="wechat-mask" id="wechatMask">
-    <div class="arrow"></div>
-    <div class="mask-text">
-      在微信中无法直接下载 APK<br>
-      请点击右上角菜单<br>
-      选择「在浏览器中打开」
+<!-- 微信浏览器提示 -->
+<div id="wechat-tip" 
+     style="
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(0,0,0,0.45);
+        padding: 20px 20px;
+        border-bottom-left-radius: 12px;
+     "
+>
+    <div style="
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 20px;
+    ">
+        <p style="
+            font-size: 20px;
+            margin: 0;
+            text-align: right;
+            line-height: 1.4;
+        ">
+            请点击右上角菜单「⋯」<br>并选择「在浏览器中打开」
+        </p>
+
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 60
+                C35 65, 55 55, 65 40
+                L70 45
+                L72 20
+                L48 25
+                L54 30
+                C40 50, 25 50, 15 48
+                Z"/>
+        </svg>
+
     </div>
-  </div>
+</div>
 
-  <script>
-    // ⚠️ 这里改成你的 GitHub Releases APK 地址
-    const APK_URL = "https://gw.test.neptu.space/ai-voice-record/android.apk";
+<div class="container">
+    <div class="title">Neptu Note</div>
 
-    const isWeChat = /micromessenger/i.test(navigator.userAgent);
-    const downloadBtn = document.getElementById("downloadBtn");
-    const mask = document.getElementById("wechatMask");
+    <div class="btn disabled">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/mac-os.png"/>
+        iOS
+    </div>
+
+    <a href="https://gw.test.neptu.space/ai-voice-record/android.apk" class="btn" style="text-decoration:none;color:#fff;">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/android-os.png"/>
+        Android
+    </a>
+
+    <div class="btn disabled">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/google-play.png"/>
+        Google play
+    </div>
+</div>
+
+<script>
+    // 检测是否是微信浏览器
+    var ua = navigator.userAgent.toLowerCase();
+    var isWeChat = ua.includes("micromessenger");
 
     if (isWeChat) {
-      // 在微信：显示遮罩提示，不允许点击
-      mask.style.display = "block";
-      downloadBtn.style.pointerEvents = "none";
-      downloadBtn.style.opacity = "0.5";
-    } else {
-      // 系统浏览器：启用下载
-      downloadBtn.href = APK_URL;
+        document.getElementById("wechat-tip").style.display = "block";
     }
-  </script>
+</script>
+
 </body>
 </html>
