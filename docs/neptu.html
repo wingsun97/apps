@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>neptu</title>
+  <style>
+    :root {
+      --header-height: 64px;
+      --container-width: 960px;
+      --padding-x: 24px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      color: #111;
+      line-height: 1.6;
+      background: #fff;
+    }
+
+    /* Shared container for sections and hero */
+    .container {
+      max-width: var(--container-width);
+      padding: 0 var(--padding-x);
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: #ffffffd8;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #eee;
+      z-index: 1000;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    nav a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #000;
+      border-bottom: 2px solid #000;
+      padding-bottom: 2px;
+    }
+
+    header.hero, section {
+      padding: 80px 0;
+      scroll-margin-top: var(--header-height);
+    }
+
+    /* Hero */
+    .hero {
+      padding-top: 160px;
+      padding-bottom: 160px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: #555;
+      margin-bottom: 32px;
+    }
+
+    .hero a {
+      padding: 12px 32px;
+      border-radius: 8px;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 16px;
+    }
+
+    /* Section titles */
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card {
+      padding: 24px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      background: #fafafa;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+    }
+
+    /* Contact */
+    .contact a {
+      color: #111;
+      text-decoration: none;
+      border-bottom: 1px solid #111;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0 20px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    .footer-content {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-icon {
+      height: 1em;
+      width: auto;
+    }
+
+    .footer-link {
+      color: #888;
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Mobile nav */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: #ffffffd8;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #eee;
+      padding: 0 var(--padding-x);
+    }
+
+    .mobile-menu a {
+      padding: 12px 0;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .mobile-menu.show {
+      display: flex;
+    }
+
+    @media (max-width: 640px) {
+      nav.desktop-nav {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      footer {
+        font-size: 0.8rem;
+      }
+      .footer-content {
+        gap: 4px;
+      }
+      .footer-icon {
+        height: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="container header-inner">
+      <div class="logo">neptu</div>
+      <nav class="desktop-nav">
+        <a href="#about">关于我们</a>
+        <a href="#products">产品</a>
+        <a href="#service">服务</a>
+        <a href="#contact">联系</a>
+      </nav>
+      <button class="mobile-menu-btn">&#9776;</button>
+    </div>
+    <div class="mobile-menu">
+      <a href="#about">关于我们</a>
+      <a href="#products">产品</a>
+      <a href="#service">服务</a>
+      <a href="#contact">联系</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <h1>让你的业务更进一步</h1>
+      <p>我们提供现代化数字解决方案，帮助企业高速成长。</p>
+      <a href="#contact">联系我们</a>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h2>关于我们</h2>
+      <p>
+        我们是一家专注于企业数字化升级的科技公司，提供网站建设、品牌系统、
+        智能工具与业务流程优化服务。团队由设计师、工程师与战略顾问组成，
+        以体验与效率为核心，为企业打造可靠、优雅、可扩展的产品体验。
+      </p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="container">
+      <h2>核心产品</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>企业官网系统</h3>
+          <p>快速搭建企业形象站点，附带 SEO、国际化、多模板支持。</p>
+        </div>
+        <div class="card">
+          <h3>SaaS 管理平台</h3>
+          <p>会员、支付、权限统一管理，灵活高效。</p>
+        </div>
+        <div class="card">
+          <h3>内容管理 CMS</h3>
+          <p>版本控制、审批流程、一键发布，轻松管理内容。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="service">
+    <div class="container">
+      <h2>服务能力</h2>
+      <p>我们提供全套策略与技术服务，包括但不限于：</p>
+      <ul>
+        <li>品牌与视觉识别</li>
+        <li>全栈开发与系统架构设计</li>
+        <li>移动 App 与 Web App 开发</li>
+        <li>交互设计与用户体验优化</li>
+        <li>企业流程数字化改造</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>联系我们</h2>
+      <p>邮箱：<a href="mailto:service.admin@capelabs.cn">service.admin@capelabs.cn</a></p>
+      <p>地址：北京市海淀区知春路51号慎昌大厦五层</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <img src="./gabeian.png" alt="备案图标" class="footer-icon">
+      <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802047021" rel="noreferrer" target="_blank">京公网安备11010802047021号</a>
+    </div>
+    <div>© 2025 neptu. 保留所有权利。</div>
+  </footer>
+
+  <script>
+    // 移动端菜单切换
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-menu a');
+
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+    });
+
+    // 点击移动端导航后自动收起菜单
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('show');
+      });
+    });
+  </script>
+
+</body>
+</html>
